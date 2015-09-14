@@ -1,0 +1,46 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+group 'io.ejf'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.34'
+    compile 'org.hibernate:hibernate-core:4.3.8.Final'
+    compile 'org.hibernate:hibernate-entitymanager:4.3.8.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+
+// Override Gradle defaults - a force an exploded JAR view
+sourceSets {
+    main {
+        output.resourcesDir = 'build/resources'
+        output.classesDir = 'build/classes/main'
+    }
+    test {
+        output.resourcesDir = 'build/resources'
+        output.classesDir = 'build/classes/test'
+    }
+}
+task(run, dependsOn: 'classes', type: JavaExec) {
+    description = 'Runs the main application'
+    main = 'io.ejf.mysql_java_docker.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'mysql_java_docker',
+                'Implementation-Version': version,
+                'Main-Class': 'io.ejf.mysql_java_docker.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
