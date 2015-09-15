@@ -36,11 +36,11 @@ public class UserTagModel {
         List userTags = null;
         try {
             userTags = session
-                    .createSQLQuery("SELECT * FROM userTags WHERE user_id = :user_id AND tag_id = :tag_id")
-                    .addEntity(UserTagModel.class)
-                    .setParameter("user_id", user.getId())
-                    .setParameter("tag_id", tag.getId())
-                    .list();
+                        .createSQLQuery("SELECT * FROM userTags WHERE user_id = :user_id AND tag_id = :tag_id")
+                        .addEntity(UserTagModel.class)
+                        .setParameter("user_id", user.getId())
+                        .setParameter("tag_id", tag.getId())
+                        .list();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

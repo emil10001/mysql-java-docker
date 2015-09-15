@@ -34,10 +34,10 @@ public class UserModel {
         List users = null;
         try {
             users = session
-                    .createSQLQuery("SELECT * FROM users WHERE username = :username")
-                    .addEntity(UserModel.class)
-                    .setParameter("username", username)
-                    .list();
+                        .createSQLQuery("SELECT * FROM users WHERE username = :username")
+                        .addEntity(UserModel.class)
+                        .setParameter("username", username)
+                        .list();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

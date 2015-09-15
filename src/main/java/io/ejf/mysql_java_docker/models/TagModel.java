@@ -28,10 +28,10 @@ public class TagModel {
         List tags = null;
         try {
             tags = session
-                            .createSQLQuery("SELECT * FROM tags WHERE tag = :tag")
-                            .addEntity(TagModel.class)
-                            .setParameter("tag", tag)
-                            .list();
+                        .createSQLQuery("SELECT * FROM tags WHERE tag = :tag")
+                        .addEntity(TagModel.class)
+                        .setParameter("tag", tag)
+                        .list();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
