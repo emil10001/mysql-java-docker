@@ -98,6 +98,10 @@ if [ "$1" = 'mysqld' ]; then
 			exit 1
 		fi
 
+		# Modified so that we can connect with Hibernate, due to the following issue in MySQL:
+		# http://stackoverflow.com/a/32054183/974800
+		echo "show_compatibility_56=1" >> /etc/mysql/my.cnf
+
 		echo
 		echo 'MySQL init process done. Ready for start up.'
 		echo
@@ -105,10 +109,6 @@ if [ "$1" = 'mysqld' ]; then
 
 	chown -R mysql:mysql "$DATADIR"
 fi
-
-# Modified so that we can connect with Hibernate, due to the following issue in MySQL:
-# http://stackoverflow.com/a/32054183/974800
-echo "show_compatibility_56=1" >> /etc/mysql/my.cnf
 
 # This was originally something like exec $@
 mysqld
