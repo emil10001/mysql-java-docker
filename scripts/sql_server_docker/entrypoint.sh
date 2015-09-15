@@ -3,6 +3,7 @@ set -e
 
 # This script is copied from the official Docker MySQL v5.7 repo, and was used as the entrypoint script.
 # It is copied here so that we can modify it, and build our database from a script.
+# https://github.com/docker-library/mysql/blob/master/5.7/docker-entrypoint.sh
 
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
